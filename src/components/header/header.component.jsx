@@ -1,26 +1,80 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql, useStaticQuery } from "gatsby"
+import headerStyles from "./header.module.scss"
 
 export default function Header() {
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `)
   return (
-    <header>
-      <h1>Charts page</h1>
+    <header id={headerStyles.header}>
+      <h1>
+        <Link className={headerStyles.title} to="/">
+          {data.site.siteMetadata.title}
+        </Link>
+      </h1>
+
       <nav>
-        <ul>
+        <ul className={headerStyles.navList}>
           <li>
-            <Link to="/">Home</Link>
+            <Link
+              className={headerStyles.navItem}
+              activeClassName={headerStyles.activeNavItem}
+              to="/"
+            >
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/contact">Contact</Link>
+            <Link
+              className={headerStyles.navItem}
+              activeClassName={headerStyles.activeNavItem}
+              to="/contact"
+            >
+              Contact
+            </Link>
           </li>
           <li>
-            <Link to="/prices">Prices</Link>
+            <Link
+              className={headerStyles.navItem}
+              activeClassName={headerStyles.activeNavItem}
+              to="/prices"
+            >
+              Prices
+            </Link>
           </li>
           <li>
-            <Link to="/register">Register</Link>
+            <Link
+              className={headerStyles.navItem}
+              activeClassName={headerStyles.activeNavItem}
+              to="/posts"
+            >
+              Posts
+            </Link>
           </li>
           <li>
-            <Link to="/login">Login</Link>
+            <Link
+              className={headerStyles.navItem}
+              activeClassName={headerStyles.activeNavItem}
+              to="/register"
+            >
+              Register
+            </Link>
+          </li>
+          <li>
+            <Link
+              className={headerStyles.navItem}
+              activeClassName={headerStyles.activeNavItem}
+              to="/login"
+            >
+              Login
+            </Link>
           </li>
         </ul>
       </nav>

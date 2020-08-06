@@ -1,5 +1,20 @@
-import React from "react"
+import React from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
+import footerStyles from './footer.module.scss'
 
 export default function Footer() {
-  return <footer>Powered by ixarlos.com / 2020</footer>
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          author
+        }
+      }
+    }
+  `)
+  return (
+    <footer className={footerStyles.footer}>
+      Powered by {data.site.siteMetadata.author}, © 2020
+    </footer>
+  )
 }
